@@ -46,9 +46,9 @@ RUN set -eux; \
 	command -v gpgconf && gpgconf --kill all || :; \
 	rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc; \
     # install Taiga protected dependencies
-    python -m pip install --upgrade pip; \
-    python -m pip install wheel; \
-    python -m pip install -r requirements.txt; \
+    python -m pip install --default-timeout=1000000 --upgrade pip; \
+    python -m pip install --default-timeout=1000000 wheel; \
+    python -m pip install --default-timeout=1000000 -r requirements.txt; \
     chmod +x docker/entrypoint.sh; \
     #  create taiga group and user to use it and give permissions over the code (in entrypoint)
     groupadd --system taiga --gid=999; \

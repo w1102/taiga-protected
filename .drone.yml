@@ -1,0 +1,30 @@
+kind: pipeline
+type: docker
+name: "taiga-protected:arm64"
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+
+
+- name: build and push taiga protected
+  image: plugins/docker
+  settings:
+    dockerfile: ./docker/Dockerfile
+    context: ./
+    registry: registry.tranquang.net
+    username: quangtran
+    password:
+      from_secret: registry_passw
+    repo: registry.tranquang.net/quangtran/taiga-protected
+    tags:
+    - latest
+    cache_from: registry.tranquang.net/quangtran/taiga-protected:latest
+
+trigger:
+  branch:
+  - arm64
+
+
